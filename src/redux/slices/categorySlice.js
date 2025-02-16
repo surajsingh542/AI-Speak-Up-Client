@@ -15,7 +15,7 @@ export const fetchCategories = createAsyncThunk(
 	async (_, { rejectWithValue }) => {
 		try {
 			const response = await axiosInstance.get('/categories');
-			console.log('Fetched categories response:', response.data);
+			// console.log('Fetched categories response:', response.data);
 			return response.data;
 		} catch (error) {
 			return rejectWithValue(error.response?.data?.message || 'Failed to fetch categories');
@@ -27,13 +27,13 @@ export const createCategory = createAsyncThunk(
 	'categories/createCategory',
 	async (formData, { rejectWithValue }) => {
 		try {
-			console.log('Creating category with data:', formData);
+			// console.log('Creating category with data:', formData);
 			const response = await axiosInstance.post('/categories', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data'
 				}
 			});
-			console.log('Create category response:', response.data);
+			// console.log('Create category response:', response.data);
 			return response.data;
 		} catch (error) {
 			return rejectWithValue(error.response?.data?.message || 'Failed to create category');
@@ -45,13 +45,13 @@ export const updateCategory = createAsyncThunk(
 	'categories/updateCategory',
 	async ({ id, formData }, { rejectWithValue }) => {
 		try {
-			console.log('Updating category with data:', formData);
+			// console.log('Updating category with data:', formData);
 			const response = await axiosInstance.put(`/categories/${id}`, formData, {
 				headers: {
 					'Content-Type': 'application/json'
 				}
 			});
-			console.log('Update category response:', response.data);
+			// console.log('Update category response:', response.data);
 			return response.data;
 		} catch (error) {
 			return rejectWithValue(error.response?.data?.message || 'Failed to update category');
