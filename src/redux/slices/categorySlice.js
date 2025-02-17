@@ -30,7 +30,7 @@ export const createCategory = createAsyncThunk(
 			// console.log('Creating category with data:', formData);
 			const response = await axiosInstance.post('/categories', formData, {
 				headers: {
-					'Content-Type': 'multipart/form-data'
+					'Content-Type': 'application/json'
 				}
 			});
 			// console.log('Create category response:', response.data);
