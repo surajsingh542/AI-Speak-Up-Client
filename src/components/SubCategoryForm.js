@@ -27,7 +27,7 @@ function SubCategoryForm({ open, onClose, onSubmit, categoryId, subCategory }) {
 				description: subCategory.description || '',
 				icon: null
 			});
-			setPreviewUrl(subCategory.icon ? `${process.env.REACT_APP_API_URL}${subCategory.icon}` : '');
+			setPreviewUrl(subCategory.icon ? `${subCategory.icon}` : '');
 		} else {
 			setFormData({
 				name: '',
