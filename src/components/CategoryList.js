@@ -122,12 +122,12 @@ function CategoryList({ categories = [] }) {
 				await dispatch(updateSubCategory({
 					categoryId: selectedCategory._id,
 					subCategoryId: selectedSubCategory._id,
-					...formData
+					formData
 				})).unwrap();
 			} else {
 				await dispatch(addSubCategory({
 					categoryId: selectedCategory._id,
-					...formData
+					formData
 				})).unwrap();
 			}
 			setOpenSubCategoryForm(false);
