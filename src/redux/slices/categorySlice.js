@@ -75,7 +75,13 @@ export const addSubCategory = createAsyncThunk(
 	'categories/addSubCategory',
 	async ({ categoryId, formData }, { rejectWithValue }) => {
 		try {
-			const response = await axiosInstance.post(`/categories/${categoryId}/subcategories`, formData);
+			const response = await axiosInstance.post(`/categories/${categoryId}/subcategories`, formData,
+				{
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}
+			);
 			return response.data;
 		} catch (error) {
 			return rejectWithValue(error.response?.data?.message || 'Failed to add subcategory');
@@ -89,7 +95,12 @@ export const updateSubCategory = createAsyncThunk(
 		try {
 			const response = await axiosInstance.put(
 				`/categories/${categoryId}/subcategories/${subCategoryId}`,
-				formData
+				formData,
+				{
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}
 			);
 			return response.data;
 		} catch (error) {

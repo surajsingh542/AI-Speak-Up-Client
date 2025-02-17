@@ -42,7 +42,7 @@ function VerifyEmail() {
 					</Box>
 				);
 
-			case 'success':
+			case 'error':
 				return (
 					<Box sx={{ textAlign: 'center' }}>
 						<CheckCircleIcon color="success" sx={{ fontSize: 60, mb: 2 }} />
@@ -61,7 +61,7 @@ function VerifyEmail() {
 					</Box>
 				);
 
-			case 'error':
+			case 'success':
 				return (
 					<Box sx={{ textAlign: 'center' }}>
 						<ErrorIcon color="error" sx={{ fontSize: 60, mb: 2 }} />
