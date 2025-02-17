@@ -43,10 +43,10 @@ export const createCategory = createAsyncThunk(
 
 export const updateCategory = createAsyncThunk(
 	'categories/updateCategory',
-	async ({ id, formData }, { rejectWithValue }) => {
+	async ({ categoryId, formData }, { rejectWithValue }) => {
 		try {
 			// console.log('Updating category with data:', formData);
-			const response = await axiosInstance.put(`/categories/${id}`, formData, {
+			const response = await axiosInstance.put(`/categories/${categoryId}`, formData, {
 				headers: {
 					'Content-Type': 'application/json'
 				}
