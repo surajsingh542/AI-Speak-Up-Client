@@ -14,7 +14,8 @@ import {
 	DialogContent,
 	DialogActions,
 	Avatar,
-	Divider
+	Divider,
+	Container
 } from '@mui/material';
 import {
 	Add as AddIcon,
@@ -104,7 +105,7 @@ function CategoryList({ categories = [] }) {
 			if (selectedCategory) {
 				await dispatch(updateCategory({
 					categoryId: selectedCategory._id,
-					...formData
+					formData
 				})).unwrap();
 			} else {
 				await dispatch(createCategory(formData)).unwrap();
@@ -227,56 +228,58 @@ function CategoryList({ categories = [] }) {
 	};
 
 	return (
-		<Box>
-			<Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-				<Typography variant="h6">Categories</Typography>
-				<Button
-					variant="contained"
-					startIcon={<AddIcon />}
-					onClick={handleAddCategory}
+		<Container maxWidth="lg" sx={{ py: 4 }}>
+			<Box>
+				<Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+					<Typography variant="h4" component="h1">Categories</Typography>
+					<Button
+						variant="contained"
+						startIcon={<AddIcon />}
+						onClick={handleAddCategory}
+					>
+						Add Category
+					</Button>
+				</Box>
+
+				<List>
+					{Array.isArray(categories) && categories.map(renderCategoryItem)}
+				</List>
+
+				<CategoryForm
+					open={openCategoryForm}
+					onClose={() => setOpenCategoryForm(false)}
+					onSubmit={handleCategorySubmit}
+					category={selectedCategory}
+				/>
+
+				<SubCategoryForm
+					open={openSubCategoryForm}
+					onClose={() => setOpenSubCategoryForm(false)}
+					onSubmit={handleSubCategorySubmit}
+					categoryId={selectedCategory?._id}
+					subCategory={selectedSubCategory}
+				/>
+
+				<Dialog
+					open={deleteDialogOpen}
+					onClose={() => setDeleteDialogOpen(false)}
 				>
-					Add Category
-				</Button>
+					<DialogTitle>
+						Confirm Delete
+					</DialogTitle>
+					<DialogContent>
+						<Typography>
+							Are you sure you want to delete this {deleteType}?
+							{deleteType === 'category' && ' This will also delete all its subcategories.'}
+						</Typography>
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+						<Button onClick={handleConfirmDelete} color="error">Delete</Button>
+					</DialogActions>
+				</Dialog>
 			</Box>
-
-			<List>
-				{Array.isArray(categories) && categories.map(renderCategoryItem)}
-			</List>
-
-			<CategoryForm
-				open={openCategoryForm}
-				onClose={() => setOpenCategoryForm(false)}
-				onSubmit={handleCategorySubmit}
-				category={selectedCategory}
-			/>
-
-			<SubCategoryForm
-				open={openSubCategoryForm}
-				onClose={() => setOpenSubCategoryForm(false)}
-				onSubmit={handleSubCategorySubmit}
-				categoryId={selectedCategory?._id}
-				subCategory={selectedSubCategory}
-			/>
-
-			<Dialog
-				open={deleteDialogOpen}
-				onClose={() => setDeleteDialogOpen(false)}
-			>
-				<DialogTitle>
-					Confirm Delete
-				</DialogTitle>
-				<DialogContent>
-					<Typography>
-						Are you sure you want to delete this {deleteType}?
-						{deleteType === 'category' && ' This will also delete all its subcategories.'}
-					</Typography>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
-					<Button onClick={handleConfirmDelete} color="error">Delete</Button>
-				</DialogActions>
-			</Dialog>
-		</Box>
+		</Container>
 	);
 }
 
