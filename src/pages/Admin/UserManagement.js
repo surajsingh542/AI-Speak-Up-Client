@@ -226,7 +226,7 @@ const UserManagement = () => {
 								</TableCell>
 								<TableCell align="right">
 									<IconButton
-										onClick={() => handleToggleStatus(user)}
+										// onClick={() => handleToggleStatus(user)}
 										color={user.status === 'active' ? 'error' : 'success'}
 										size="small"
 									>
